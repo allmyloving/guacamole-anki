@@ -7,6 +7,8 @@ module.exports = {
     "airbnb",
     "plugin:react/recommended",
     "plugin:prettier/recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings",
     "prettier"
   ],
   globals: {
@@ -23,7 +25,6 @@ module.exports = {
   plugins: ["react", "prettier"],
   rules: {
     "linebreak-style": 0,
-    "array-bracket-spacing": [2, "always"],
     "import/no-default-export": 2,
     "import/prefer-default-export": 0,
     "max-len": [2, { code: 180, ignoreStrings: true }],

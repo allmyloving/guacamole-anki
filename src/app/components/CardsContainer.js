@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Card } from "./Card";
 import { Tile } from "react-bulma-components";
+import { Card } from "./Card";
 
 export const CardsContainer = ({ cards, lang }) => (
   <Tile kind="ancestor">
@@ -9,7 +9,7 @@ export const CardsContainer = ({ cards, lang }) => (
       .filter(card => card.lang === lang)
       .map(card => (
         <Tile size={4} key={card.id}>
-          <Card card={card}></Card>
+          <Card card={card} />
         </Tile>
       ))}
   </Tile>
