@@ -3,7 +3,7 @@ export const cards = [
     id: "123",
     word: "das Brot",
     example: "Ich mag Brot zum Fruehstueck",
-    lang: "DE",
+    language: "DE",
     translation: "bread",
     definition: "Lebensmittel, das man mit Butter bestreichen kann",
     dateAdded: new Date()
@@ -12,7 +12,7 @@ export const cards = [
     id: "321",
     word: "das Teig",
     example: "Um schmackhaftes Brot zu machen, muss man das Teig gut kneiden",
-    lang: "DE",
+    language: "DE",
     translation: "dough",
     definition: "",
     dateAdded: new Date()
@@ -21,7 +21,7 @@ export const cards = [
     id: "222",
     word: "exert influence over",
     example: "",
-    lang: "EN",
+    language: "EN",
     translation: "bread",
     definition: "",
     dateAdded: new Date()

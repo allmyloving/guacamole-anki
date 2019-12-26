@@ -1,21 +1,35 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Tile } from "react-bulma-components";
+import { Tile, Heading, Box } from "react-bulma-components";
 import { Card } from "./Card";
 
-export const CardsContainer = ({ cards, lang }) => (
-  <Tile kind="ancestor">
-    {cards
-      .filter(card => card.lang === lang)
-      .map(card => (
-        <Tile size={4} key={card.id}>
-          <Card card={card} />
-        </Tile>
-      ))}
-  </Tile>
+export const CardsContainer = ({
+  cards,
+  lang: { value, title },
+  onEditButtonClick,
+  onDeleteButtonClick
+}) => (
+  <Box>
+    <Heading>{title}</Heading>
+    <Tile kind="ancestor">
+      {cards
+        .filter(card => card.language === value)
+        .map(card => (
+          <Tile size={4} key={card.id}>
+            <Card
+              card={card}
+              onEditButtonClick={onEditButtonClick}
+              onDeleteButtonClick={onDeleteButtonClick}
+            />
+          </Tile>
+        ))}
+    </Tile>
+  </Box>
 );
 
 CardsContainer.propTypes = {
   cards: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
-  lang: PropTypes.string.isRequired
+  lang: PropTypes.string.isRequired,
+  onEditButtonClick: PropTypes.func.isRequired,
+  onDeleteButtonClick: PropTypes.func.isRequired
 };

@@ -3,14 +3,7 @@ module.exports = {
     browser: true,
     es6: true
   },
-  extends: [
-    "airbnb",
-    "plugin:react/recommended",
-    "plugin:prettier/recommended",
-    "plugin:import/errors",
-    "plugin:import/warnings",
-    "prettier"
-  ],
+  extends: ["airbnb", "plugin:react/recommended", "plugin:prettier/recommended", "plugin:import/errors", "plugin:import/warnings", "prettier"],
   globals: {
     Atomics: "readonly",
     SharedArrayBuffer: "readonly"
@@ -29,6 +22,7 @@ module.exports = {
     "import/prefer-default-export": 0,
     "max-len": [2, { code: 180, ignoreStrings: true }],
     "prettier/prettier": "error",
+    "react/prop-types": 1,
     "react/jsx-filename-extension": [
       "warn",
       {
