@@ -11,7 +11,7 @@ const fields = [
   {
     label: "Original",
     placeholder: "Word in original language",
-    name: "word",
+    name: "original",
     component: TextInput
   },
   {
@@ -87,7 +87,7 @@ AddCardForm.propTypes = {
   initialValues: PropTypes.shape({
     language: PropTypes.string.isRequired,
     example: PropTypes.string.isRequired,
-    word: PropTypes.string.isRequired,
+    original: PropTypes.string.isRequired,
     translation: PropTypes.string.isRequired,
     definition: PropTypes.string
   })
@@ -97,7 +97,7 @@ AddCardForm.defaultProps = {
   initialValues: {
     language: "",
     example: "",
-    word: "",
+    original: "",
     translation: "",
     definition: ""
   }

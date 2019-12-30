@@ -1,8 +1,7 @@
 import { SET_CARDS } from "../actions";
-import { cards } from "../../../data/cards";
 
 const initialState = {
-  cards
+  cards: []
 };
 
 export const cardsReducer = (state = initialState, action) => {

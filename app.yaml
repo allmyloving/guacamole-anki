@@ -12,5 +12,14 @@
 # limitations under the License.
 # [START app_yaml]
 env: standard
-runtime: nodejs12
+runtime: nodejs10
+service: default
+handlers:
+  - url: /
+    static_files: build/index.html
+    upload: build/index.html
+
+  - url: /(.*)
+    static_files: build/\1
+    upload: build/(.*)
 # [END app_yaml]

@@ -1,33 +1,43 @@
-import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { AddCardForm } from "./form";
 import { Modal } from "./Modal";
-import { setCards } from "../store/actions";
 
 import { CardsContainer } from "./CardsContainer";
 import { AddCardSection } from "./AddCardSection";
 import { languages } from "../../data/supportedLanguages";
-
-const getRandomNumber = () => Math.random();
+import { createCard } from "../api";
+import { loadCards } from "../store/actions";
 
 export const MainContainer = () => {
   const [isFormVisible, setFormVisible] = useState(false);
   const [modalMode, setModalMode] = useState();
   const [initialFormData, setInitialFormData] = useState();
-  const cards = useSelector(state => state.cards.cards);
+
+  const cards = useSelector(({ cards }) => cards.cards);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(loadCards());
+  }, []);
+
   const onSave = newCard => {
-    const index = cards.findIndex(({ id }) => id === newCard.id);
-    const items =
-      index !== -1
-        ? [
-            ...cards.slice(0, index),
-            newCard,
-            ...cards.slice(index + 1, cards.length)
-          ]
-        : [...cards, { ...newCard, id: getRandomNumber().toString() }];
-    dispatch(setCards(items));
-    setFormVisible(false);
+    createCard(newCard)
+      .then(() => dispatch(loadCards()))
+      .then(() => {
+        setFormVisible(false);
+      });
+    // const index = cards.findIndex(({ id }) => id === newCard.id);
+    // const items =
+    //   index !== -1
+    //     ? [
+    //         ...cards.slice(0, index),
+    //         newCard,
+    //         ...cards.slice(index + 1, cards.length)
+    //       ]
+    //     : [...cards, { ...newCard, id: getRandomNumber().toString() }];
+    // dispatch(setCards(items));
+    // setFormVisible(false);
   };
   const onDelete = cardId => {
     const index = cards.findIndex(({ id }) => id === cardId);
@@ -36,7 +46,7 @@ export const MainContainer = () => {
       ...cards.slice(index + 1, cards.length)
     ];
 
-    dispatch(setCards(items));
+    // dispatch(setCards(items));
     setFormVisible(false);
   };
   const openModal = data => {
@@ -44,6 +54,7 @@ export const MainContainer = () => {
     setInitialFormData(data);
     setFormVisible(true);
   };
+  if (!cards) return null;
   return (
     <>
       <AddCardSection onAddButtonClick={openModal} />

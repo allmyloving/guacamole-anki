@@ -7,7 +7,7 @@ export const AddCardSection = ({ onAddButtonClick }) => {
       <Button
         rounded
         color="primary"
-        onClick={onAddButtonClick}
+        onClick={() => onAddButtonClick()}
         style={{ marginBottom: 30 }}
       >
         Add new

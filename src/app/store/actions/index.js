@@ -1,1 +1,1 @@
-export { SET_CARDS, setCards } from "./cards-actions";
+export { SET_CARDS, loadCards } from "./cards-actions";

@@ -5,20 +5,16 @@ import { Card as StyledCard } from "react-bulma-components";
 const { Content, Footer } = StyledCard;
 
 export const Card = ({ card, onEditButtonClick, onDeleteButtonClick }) => {
-  const { word, example, language, translation, definition } = card;
+  const { original, example, translation, definition } = card;
   return (
     <StyledCard style={{ width: "100%" }}>
       <header className="card-header" style={{ height: 48 }}>
-        <p className="card-header-title">{word}</p>
+        <p className="card-header-title">{original}</p>
       </header>
       <Content>
         <p>
           Example:
           {example}
-        </p>
-        <p>
-          Lang:
-          {language}
         </p>
         <p>
           Translation:
@@ -51,7 +47,7 @@ export const Card = ({ card, onEditButtonClick, onDeleteButtonClick }) => {
 
 Card.propTypes = {
   card: PropTypes.shape({
-    word: PropTypes.string.isRequired,
+    original: PropTypes.string.isRequired,
     example: PropTypes.string,
     language: PropTypes.string.isRequired,
     translation: PropTypes.string.isRequired,
