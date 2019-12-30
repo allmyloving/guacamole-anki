@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import { Form } from "react-bulma-components";
 
@@ -12,3 +13,10 @@ export const TextInput = ({ label, onChange, value, placeholder }) => (
     </Control>
   </Field>
 );
+
+TextInput.propTypes = {
+  label: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
+  placeholder: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired
+};

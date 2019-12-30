@@ -29,7 +29,10 @@ export const CardsContainer = ({
 
 CardsContainer.propTypes = {
   cards: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
-  lang: PropTypes.string.isRequired,
+  lang: PropTypes.shape({
+    value: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired
+  }).isRequired,
   onEditButtonClick: PropTypes.func.isRequired,
   onDeleteButtonClick: PropTypes.func.isRequired
 };

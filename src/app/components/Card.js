@@ -47,10 +47,13 @@ export const Card = ({ card, onEditButtonClick, onDeleteButtonClick }) => {
 
 Card.propTypes = {
   card: PropTypes.shape({
+    id: PropTypes.string.isRequired,
     original: PropTypes.string.isRequired,
     example: PropTypes.string,
     language: PropTypes.string.isRequired,
     translation: PropTypes.string.isRequired,
     definition: PropTypes.string
-  }).isRequired
+  }).isRequired,
+  onEditButtonClick: PropTypes.func.isRequired,
+  onDeleteButtonClick: PropTypes.func.isRequired
 };
