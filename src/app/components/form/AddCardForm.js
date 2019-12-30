@@ -52,7 +52,6 @@ export const AddCardForm = ({ initialValues, onSave, onCancel }) => {
   const changeField = ({ target: { value } }, fieldName) => {
     changeValues({ ...values, [fieldName]: value });
   };
-  console.log(values);
   return (
     <div>
       {fields.map(({ name, component: Component, ...rest }) => (

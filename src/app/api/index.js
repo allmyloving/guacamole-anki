@@ -1,1 +1,1 @@
-export { fetchCards, createCard } from "./cards";
+export { fetchCards, createCard, updateCard, deleteCard } from "./cards";

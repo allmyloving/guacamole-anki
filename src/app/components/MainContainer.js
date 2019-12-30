@@ -6,7 +6,7 @@ import { Modal } from "./Modal";
 import { CardsContainer } from "./CardsContainer";
 import { AddCardSection } from "./AddCardSection";
 import { languages } from "../../data/supportedLanguages";
-import { createCard } from "../api";
+import { createCard, updateCard, deleteCard } from "../api";
 import { loadCards } from "../store/actions";
 
 export const MainContainer = () => {
@@ -21,33 +21,18 @@ export const MainContainer = () => {
     dispatch(loadCards());
   }, []);
 
+  const createOrUpdateCard = newCard =>
+    newCard.id ? updateCard(newCard) : createCard(newCard);
+
   const onSave = newCard => {
-    createCard(newCard)
+    createOrUpdateCard(newCard)
       .then(() => dispatch(loadCards()))
       .then(() => {
         setFormVisible(false);
       });
-    // const index = cards.findIndex(({ id }) => id === newCard.id);
-    // const items =
-    //   index !== -1
-    //     ? [
-    //         ...cards.slice(0, index),
-    //         newCard,
-    //         ...cards.slice(index + 1, cards.length)
-    //       ]
-    //     : [...cards, { ...newCard, id: getRandomNumber().toString() }];
-    // dispatch(setCards(items));
-    // setFormVisible(false);
   };
-  const onDelete = cardId => {
-    const index = cards.findIndex(({ id }) => id === cardId);
-    const items = [
-      ...cards.slice(0, index),
-      ...cards.slice(index + 1, cards.length)
-    ];
-
-    // dispatch(setCards(items));
-    setFormVisible(false);
+  const onDelete = id => {
+    deleteCard(id).then(() => dispatch(loadCards()));
   };
   const openModal = data => {
     setModalMode(data ? "add" : "edit");
