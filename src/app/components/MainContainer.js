@@ -9,7 +9,7 @@ import { languages } from "../../data/supportedLanguages";
 import { createCard, updateCard, deleteCard } from "../api";
 import { loadCards } from "../store/actions";
 
-export const MainContainer = () => {
+export const MainContainer = ({ setLoading }) => {
   const [isFormVisible, setFormVisible] = useState(false);
   const [modalMode, setModalMode] = useState();
   const [initialFormData, setInitialFormData] = useState();
@@ -18,21 +18,29 @@ export const MainContainer = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(loadCards());
+    withLoader(() => Promise.resolve());
   }, []);
 
   const createOrUpdateCard = newCard =>
     newCard.id ? updateCard(newCard) : createCard(newCard);
 
-  const onSave = newCard => {
-    createOrUpdateCard(newCard)
+  const withLoader = action => {
+    setLoading(true);
+    action()
       .then(() => dispatch(loadCards()))
       .then(() => {
-        setFormVisible(false);
+        setLoading(false);
       });
   };
+
+  const onSave = newCard => {
+    withLoader(() => {
+      setFormVisible(false);
+      return createOrUpdateCard(newCard);
+    });
+  };
   const onDelete = id => {
-    deleteCard(id).then(() => dispatch(loadCards()));
+    withLoader(() => deleteCard(id));
   };
   const openModal = data => {
     setModalMode(data ? "add" : "edit");

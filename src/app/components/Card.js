@@ -7,7 +7,7 @@ const { Content, Footer } = StyledCard;
 export const Card = ({ card, onEditButtonClick, onDeleteButtonClick }) => {
   const { original, example, translation, definition } = card;
   return (
-    <StyledCard style={{ width: "100%" }}>
+    <StyledCard style={{ width: "100%", margin: 10 }}>
       <header className="card-header" style={{ height: 48 }}>
         <p className="card-header-title">{original}</p>
       </header>

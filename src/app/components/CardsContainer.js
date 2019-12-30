@@ -11,7 +11,7 @@ export const CardsContainer = ({
 }) => (
   <Box>
     <Heading>{title}</Heading>
-    <Tile kind="ancestor">
+    <Tile kind="ancestor" style={{ flexWrap: "wrap" }}>
       {cards
         .filter(card => card.language === value)
         .map(card => (
