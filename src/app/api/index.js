@@ -1,1 +1,7 @@
-export { fetchCards, createCard, updateCard, deleteCard } from "./cards";
+export {
+  fetchCards,
+  createCard,
+  updateCard,
+  deleteCard,
+  setCardLearned
+} from "./cards";

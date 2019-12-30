@@ -23,3 +23,10 @@ export const deleteCard = id =>
   fetch(`${host}/cards/${id}`, {
     method: "DELETE"
   });
+
+export const setCardLearned = (id, success) =>
+  fetch(`${host}/cards/${id}`, {
+    method: "PATCH",
+    body: JSON.stringify({ success }),
+    headers
+  });

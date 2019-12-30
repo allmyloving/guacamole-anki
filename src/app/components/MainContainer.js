@@ -81,7 +81,6 @@ export const MainContainer = ({ setLoading }) => {
           />
         ))
       )}
-      }
       <Modal
         title={modalMode === "add" ? "Add new card" : "Edit card"}
         isShown={isFormVisible}
