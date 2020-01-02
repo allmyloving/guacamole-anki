@@ -1,38 +1,61 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Card as StyledCard, Button } from "react-bulma-components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheck, faTimes, faRedoAlt } from "@fortawesome/free-solid-svg-icons";
 import { setCardLearned } from "../../api";
 
 const { Content, Footer } = StyledCard;
 
 export const TrainingCard = ({ card, actionCallback }) => {
   const { id, original, example, translation } = card;
-  const [showAnswer, setShowAnswer] = useState(false);
   const [showExample, setShowExample] = useState(false);
+  const [showOriginal, setShowOriginal] = useState(true);
   const cardLearned = learned => {
     setCardLearned(id, learned).then(actionCallback);
   };
 
   return (
-    <StyledCard style={{ width: 500, display: "inline-block" }}>
+    <StyledCard style={{ width: 500, display: "inline-block", border: 2 }}>
       <Content>
-        <p>{original}</p>
+        <p style={{ fontSize: 24, fontWeight: "bold" }}>
+          {showOriginal ? original : translation}
+        </p>
         {showExample && <i>{example}</i>}
         {!showExample && (
           <Button onClick={() => setShowExample(true)}>Hint</Button>
         )}
-        {showAnswer && <p>{`Translation: ${translation}`}</p>}
-        {!showAnswer && (
-          <Button onClick={() => setShowAnswer(true)}>Show translation</Button>
-        )}
+        <Button
+          style={{ position: "absolute", top: 0, right: 0 }}
+          onClick={() => setShowOriginal(!showOriginal)}
+        >
+          <FontAwesomeIcon icon={faRedoAlt} />
+        </Button>
       </Content>
       <Footer>
-        <Footer.Item renderAs="a" href="#" onClick={() => cardLearned(true)}>
-          I know this one
-        </Footer.Item>
-        <Footer.Item renderAs="a" href="#" onClick={() => cardLearned(false)}>
-          Hmmm, not so much
-        </Footer.Item>
+        <Button.Group
+          hasAddons
+          fullwidth
+          position="centered"
+          style={{ width: "100%", opacity: 0.8, height: 50 }}
+        >
+          <Button
+            color="success light"
+            light
+            onClick={() => cardLearned(true)}
+            style={{ width: "50%", height: "100%" }}
+          >
+            <FontAwesomeIcon icon={faCheck} />
+          </Button>
+          <Button
+            style={{ width: "50%", height: "100%" }}
+            color="danger"
+            className="is-success is-light"
+            onClick={() => cardLearned(false)}
+          >
+            <FontAwesomeIcon icon={faTimes} />
+          </Button>
+        </Button.Group>
       </Footer>
     </StyledCard>
   );

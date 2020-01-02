@@ -28,7 +28,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint ./src --ignore-pattern=**/*.test.js --fix"
+    "lint": "eslint ./src --ignore-pattern=**/*.test.js --fix",
+    "deploy": "npm run build && gcloud app deploy --version=v1 --quiet"
   },
   "eslintConfig": {
     "extends": "react-app"

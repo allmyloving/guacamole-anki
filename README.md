@@ -39,4 +39,4 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 
 ### Deployment
 
-For deploying the app to Google Cloud, firsty login to gcloud console, then in Terminal run `npm run build && gcloud app deploy`, type `Y`, when prompted to continue
+To deploy the app to Google Cloud, firsty login to gcloud console, then in Terminal run `npm run deploy`
