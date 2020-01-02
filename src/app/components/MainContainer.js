@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
-import { Button } from "react-bulma-components";
+import { Tabs } from "react-bulma-components";
 
 import { AddCardForm } from "./form";
 import { Modal } from "./Modal";
@@ -10,12 +10,16 @@ import { languages } from "../../data/supportedLanguages";
 import { createCard, updateCard, deleteCard } from "../api";
 import { loadCards } from "../store/actions";
 import { TrainingContainer } from "./training";
+import { Header } from "./Header";
+
+const { Tab } = Tabs;
 
 export const MainContainer = ({ setLoading }) => {
   const [isFormVisible, setFormVisible] = useState(false);
   const [modalMode, setModalMode] = useState(false);
   const [initialFormData, setInitialFormData] = useState();
   const [isTrainMode, setTrainMode] = useState(false);
+  const [selectedLang, setSelectedLang] = useState(languages[0]);
 
   const cards = useSelector(state => state.cards.cards);
   const dispatch = useDispatch();
@@ -53,33 +57,35 @@ export const MainContainer = ({ setLoading }) => {
   if (!cards) return null;
   return (
     <>
-      <div style={{ marginBottom: 30 }}>
-        <Button rounded color="primary" onClick={openModal}>
-          Add new
-        </Button>
-        <Button
-          rounded
-          color="info"
-          onClick={() => {
-            setTrainMode(!isTrainMode);
-          }}
-          style={{ float: "right" }}
-        >
-          Train mode
-        </Button>
-      </div>
+      <Header
+        onAddButtonClick={openModal}
+        onTrainModeButtonClick={() => {
+          setTrainMode(!isTrainMode);
+        }}
+        isTrainMode={isTrainMode}
+      />
       {isTrainMode ? (
         <TrainingContainer />
       ) : (
-        languages.map(lang => (
+        <>
+          <Tabs fullwidth type="toggle">
+            {languages.map(lang => (
+              <Tab
+                key={lang.value}
+                active={selectedLang === lang}
+                onClick={() => setSelectedLang(lang)}
+              >
+                {lang.title}
+              </Tab>
+            ))}
+          </Tabs>
           <CardsContainer
-            key={lang.value}
             cards={cards}
-            lang={lang}
+            lang={selectedLang}
             onEditButtonClick={openModal}
             onDeleteButtonClick={onDelete}
           />
-        ))
+        </>
       )}
       <Modal
         title={modalMode === "add" ? "Add new card" : "Edit card"}

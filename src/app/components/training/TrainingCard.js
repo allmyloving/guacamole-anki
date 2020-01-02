@@ -6,7 +6,7 @@ import { setCardLearned } from "../../api";
 const { Content, Footer } = StyledCard;
 
 export const TrainingCard = ({ card, actionCallback }) => {
-  const { id, original, example, translation, definition } = card;
+  const { id, original, example, translation } = card;
   const [showAnswer, setShowAnswer] = useState(false);
   const [showExample, setShowExample] = useState(false);
   const cardLearned = learned => {
@@ -14,14 +14,17 @@ export const TrainingCard = ({ card, actionCallback }) => {
   };
 
   return (
-    <StyledCard style={{ width: 500, display: 'inline-block' }}>
+    <StyledCard style={{ width: 500, display: "inline-block" }}>
       <Content>
         <p>{original}</p>
         {showExample && <i>{example}</i>}
-        {!showExample && <Button onClick={() => setShowExample(true)}>Hint</Button>}
-        {showAnswer && <p>
-Translation:{translation}</p>}
-        {!showAnswer && <Button onClick={() => setShowAnswer(true)}>Show translation</Button>}
+        {!showExample && (
+          <Button onClick={() => setShowExample(true)}>Hint</Button>
+        )}
+        {showAnswer && <p>{`Translation: ${translation}`}</p>}
+        {!showAnswer && (
+          <Button onClick={() => setShowAnswer(true)}>Show translation</Button>
+        )}
       </Content>
       <Footer>
         <Footer.Item renderAs="a" href="#" onClick={() => cardLearned(true)}>
@@ -43,7 +46,5 @@ TrainingCard.propTypes = {
     language: PropTypes.string.isRequired,
     translation: PropTypes.string.isRequired,
     definition: PropTypes.string
-  }).isRequired,
-  onEditButtonClick: PropTypes.func.isRequired,
-  onDeleteButtonClick: PropTypes.func.isRequired
+  }).isRequired
 };

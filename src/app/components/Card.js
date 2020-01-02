@@ -1,11 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Card as StyledCard } from "react-bulma-components";
+import { CardActions } from "./CardActions";
 
-const { Content, Footer } = StyledCard;
+const { Content } = StyledCard;
 
 export const Card = ({ card, onEditButtonClick, onDeleteButtonClick }) => {
   const { original, example, translation, definition } = card;
+
   return (
     <StyledCard style={{ width: "100%", margin: 10 }}>
       <header className="card-header" style={{ height: 48 }}>
@@ -25,22 +27,11 @@ export const Card = ({ card, onEditButtonClick, onDeleteButtonClick }) => {
           {definition}
         </p>
       </Content>
-      <Footer>
-        <Footer.Item
-          renderAs="a"
-          href="#"
-          onClick={() => onEditButtonClick(card)}
-        >
-          Edit
-        </Footer.Item>
-        <Footer.Item
-          renderAs="a"
-          href="#"
-          onClick={() => onDeleteButtonClick(card.id)}
-        >
-          Delete
-        </Footer.Item>
-      </Footer>
+      <CardActions
+        onEditButtonClick={onEditButtonClick}
+        onDeleteButtonClick={onDeleteButtonClick}
+        card={card}
+      />
     </StyledCard>
   );
 };
