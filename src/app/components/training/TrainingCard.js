@@ -2,7 +2,12 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Card as StyledCard, Button } from "react-bulma-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck, faTimes, faRedoAlt } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCheck,
+  faTimes,
+  faRedoAlt,
+  faHandPointRight
+} from "@fortawesome/free-solid-svg-icons";
 import { setCardLearned } from "../../api";
 
 const { Content, Footer } = StyledCard;
@@ -12,7 +17,9 @@ export const TrainingCard = ({ card, actionCallback }) => {
   const [showExample, setShowExample] = useState(false);
   const [showOriginal, setShowOriginal] = useState(true);
   const cardLearned = learned => {
-    setCardLearned(id, learned).then(actionCallback);
+    setCardLearned(id, learned)
+      .then(() => showExample(false))
+      .then(actionCallback);
   };
 
   return (
@@ -23,7 +30,10 @@ export const TrainingCard = ({ card, actionCallback }) => {
         </p>
         {showExample && <i>{example}</i>}
         {!showExample && (
-          <Button onClick={() => setShowExample(true)}>Hint</Button>
+          <Button onClick={() => setShowExample(true)} text>
+            <FontAwesomeIcon icon={faHandPointRight} />
+            Hint
+          </Button>
         )}
         <Button
           style={{ position: "absolute", top: 0, right: 0 }}
@@ -40,7 +50,7 @@ export const TrainingCard = ({ card, actionCallback }) => {
           style={{ width: "100%", opacity: 0.8, height: 50 }}
         >
           <Button
-            color="success light"
+            color="success"
             light
             onClick={() => cardLearned(true)}
             style={{ width: "50%", height: "100%" }}

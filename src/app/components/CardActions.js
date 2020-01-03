@@ -10,12 +10,13 @@ const { Footer } = StyledCard;
 export const CardActions = ({
   onEditButtonClick,
   onDeleteButtonClick,
-  card
+  card,
+  extraStyles,
 }) => {
   const [isModalVisible, setModalVisible] = useState(false);
   return (
     <>
-      <Footer>
+      <Footer style={{...extraStyles, width: '100%'}}>
         <Footer.Item
           renderAs="a"
           href="#"

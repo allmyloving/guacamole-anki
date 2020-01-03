@@ -3,26 +3,37 @@ import PropTypes from "prop-types";
 import { Card as StyledCard, Box } from "react-bulma-components";
 import { CardActions } from "./CardActions";
 
+const styles = {
+  Card: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    width: "100%",
+    margin: 10,
+    textAlign: "center"
+  }
+};
 const { Content } = StyledCard;
 
 export const Card = ({ card, onEditButtonClick, onDeleteButtonClick }) => {
   const { original, example, translation, definition } = card;
 
   return (
-    <StyledCard style={{ width: "100%", margin: 10, textAlign: "center" }}>
-      <div style={{ display: "inline-block" }}>
+    <StyledCard style={styles.Card}>
+      <div style={{ flexShrink: 0 }}>
         <p className="card-header-title" style={{ fontSize: 24 }}>
           {original}
         </p>
+        <p style={{ fontStyle: "italic", padding: 10 }}>{translation}</p>
       </div>
-      <p style={{ fontStyle: "italic", padding: 10 }}>{translation}</p>
-      <Content>
+      <Content style={{ flexGrow: 1 }}>
         <Box>{definition}</Box>
         <blockquote style={{ fontStyle: "italic" }}>
           {`"${example}"`}
         </blockquote>
       </Content>
       <CardActions
+        extraStyles={{ flexShrink: 0 }}
         onEditButtonClick={onEditButtonClick}
         onDeleteButtonClick={onDeleteButtonClick}
         card={card}
