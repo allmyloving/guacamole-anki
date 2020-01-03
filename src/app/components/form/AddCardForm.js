@@ -7,7 +7,7 @@ import { TextInput } from "./TextInput";
 import { SelectInput } from "./SelectInput";
 import { languages } from "../../../data/supportedLanguages";
 
-const { Field, Control } = Form;
+const { Field, Control, Textarea } = Form;
 
 const fields = [
   {
@@ -20,7 +20,8 @@ const fields = [
     label: "Example",
     placeholder: "Example in the sentence",
     name: "example",
-    component: TextInput
+    component: TextInput,
+    renderAs: Textarea
   },
   {
     label: "Translation",
@@ -32,7 +33,8 @@ const fields = [
     label: "Definition",
     placeholder: "Definition",
     name: "definition",
-    component: TextInput
+    component: TextInput,
+    renderAs: Textarea
   },
   {
     label: "Language",

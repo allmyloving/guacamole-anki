@@ -5,9 +5,9 @@ import { Form } from "react-bulma-components";
 const { Field, Label, Control, Select } = Form;
 
 export const SelectInput = ({ label, options, onChange, value }) => (
-  <Field>
-    <Label>{label}</Label>
-    <Control>
+  <Field style={{ display: "flex" }}>
+    <Label style={{ width: 90 }}>{label}</Label>
+    <Control style={{ flexGrow: 1 }}>
       <Select onChange={onChange} value={value}>
         {options.map(({ value: langValue, title }) => (
           <option key={langValue} value={langValue}>
