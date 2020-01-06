@@ -4,8 +4,14 @@ import { Form } from "react-bulma-components";
 
 const { Field, Label, Control, Select } = Form;
 
-export const SelectInput = ({ label, options, onChange, value }) => (
-  <Field style={{ display: "flex" }}>
+export const SelectInput = ({
+  label,
+  options,
+  onChange,
+  value,
+  extraStyles
+}) => (
+  <Field style={{ display: "flex", ...extraStyles }}>
     <Label style={{ width: 90 }}>{label}</Label>
     <Control style={{ flexGrow: 1 }}>
       <Select onChange={onChange} value={value}>

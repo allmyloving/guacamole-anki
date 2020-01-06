@@ -27,10 +27,12 @@ export const Card = ({ card, onEditButtonClick, onDeleteButtonClick }) => {
         <p style={{ fontStyle: "italic", padding: 10 }}>{translation}</p>
       </div>
       <Content style={{ flexGrow: 1 }}>
-        <Box>{definition}</Box>
-        <blockquote style={{ fontStyle: "italic" }}>
-          {`"${example}"`}
-        </blockquote>
+        {definition && <Box>{definition}</Box>}
+        {example && (
+          <blockquote style={{ fontStyle: "italic" }}>
+            {`"${example}"`}
+          </blockquote>
+        )}
       </Content>
       <CardActions
         extraStyles={{ flexShrink: 0 }}

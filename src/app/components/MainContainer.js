@@ -49,16 +49,20 @@ export const MainContainer = ({ setLoading }) => {
   const onDelete = id => {
     withLoader(() => deleteCard(id));
   };
-  const openModal = data => {
-    setModalMode(data ? "add" : "edit");
+  const openEditModal = data => {
+    setModalMode("edit");
     setInitialFormData(data);
+    setFormVisible(true);
+  };
+  const openAddNewModal = () => {
+    setModalMode("add");
     setFormVisible(true);
   };
   if (!cards) return null;
   return (
     <>
       <Header
-        onAddButtonClick={openModal}
+        onAddButtonClick={openAddNewModal}
         onTrainModeButtonClick={() => {
           setTrainMode(!isTrainMode);
         }}
@@ -82,7 +86,7 @@ export const MainContainer = ({ setLoading }) => {
           <CardsContainer
             cards={cards}
             lang={selectedLang}
-            onEditButtonClick={openModal}
+            onEditButtonClick={openEditModal}
             onDeleteButtonClick={onDelete}
           />
         </>

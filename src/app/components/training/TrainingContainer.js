@@ -26,7 +26,15 @@ export const TrainingContainer = () => {
   }
 
   return (
-    <div style={{ textAlign: "center", textAlignLast: "center" }}>
+    <div
+      style={{
+        textAlign: "center",
+        textAlignLast: "center",
+        display: "flex",
+        alignItems: "center",
+        flexDirection: "column"
+      }}
+    >
       {trainingCards.length ? (
         <TrainingCard
           id={trainingCards[currentIndex].id}
@@ -40,6 +48,7 @@ export const TrainingContainer = () => {
             value={selectedLanguage}
             onChange={({ target: { value } }) => setSelectedLanguage(value)}
             options={languages}
+            extraStyles={{ flexDirection: "column" }}
           />
           <Button size="large" onClick={startTraining}>
             <FontAwesomeIcon icon={faPlay} style={{ marginRight: 10 }} />
