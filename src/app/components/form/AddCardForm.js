@@ -54,10 +54,8 @@ export const AddCardForm = ({ initialValues, onSave, onCancel }) => {
   const [values, changeValues] = useState(initialValues);
 
   const changeField = ({ target: { value } }, fieldName) => {
-    console.log(fieldName, value);
     changeValues({ ...values, [fieldName]: value });
   };
-  console.log(values);
   return (
     <>
       <div style={{ marginBottom: 30 }}>
