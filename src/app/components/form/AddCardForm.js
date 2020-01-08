@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes, faCheck } from "@fortawesome/free-solid-svg-icons";
 import { TextInput } from "./TextInput";
 import { SelectInput } from "./SelectInput";
+import { TagsInput } from "./TagsInput";
 import { languages } from "../../../data/supportedLanguages";
 
 const { Field, Control, Textarea } = Form;
@@ -47,13 +48,29 @@ const fields = [
       },
       ...languages
     ]
+  },
+  {
+    label: "Tags",
+    name: "tags",
+    component: TagsInput,
+    options: [
+      { value: "" },
+      {
+        value: "Kapitel 7",
+        color: "success"
+      },
+      {
+        value: "Kapitel 6",
+        color: "warning"
+      }
+    ]
   }
 ];
 
 export const AddCardForm = ({ initialValues, onSave, onCancel }) => {
   const [values, changeValues] = useState(initialValues);
 
-  const changeField = ({ target: { value } }, fieldName) => {
+  const changeField = (value, fieldName) => {
     changeValues({ ...values, [fieldName]: value });
   };
   return (
@@ -62,8 +79,8 @@ export const AddCardForm = ({ initialValues, onSave, onCancel }) => {
         {fields.map(({ name, component: Component, ...rest }) => (
           <Component
             key={name}
-            onChange={event => {
-              changeField(event, name);
+            onChange={value => {
+              changeField(value, name);
             }}
             value={values[name]}
             {...rest}
@@ -106,6 +123,7 @@ AddCardForm.defaultProps = {
     example: "",
     original: "",
     translation: "",
-    definition: ""
+    definition: "",
+    tags: []
   }
 };

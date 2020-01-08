@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import { Tabs } from "react-bulma-components";
 
-import { AddCardForm } from "./form";
+import { AddCardForm, ManageTagsForm } from "./form";
 import { Modal } from "./Modal";
 import { CardsContainer } from "./CardsContainer";
 import { languages } from "../../data/supportedLanguages";
@@ -16,6 +16,7 @@ const { Tab } = Tabs;
 
 export const MainContainer = ({ setLoading }) => {
   const [isFormVisible, setFormVisible] = useState(false);
+  const [isTagsModalVisible, setTagsModalVisible] = useState(false);
   const [modalMode, setModalMode] = useState(false);
   const [initialFormData, setInitialFormData] = useState();
   const [isTrainMode, setTrainMode] = useState(false);
@@ -63,9 +64,8 @@ export const MainContainer = ({ setLoading }) => {
     <>
       <Header
         onAddButtonClick={openAddNewModal}
-        onTrainModeButtonClick={() => {
-          setTrainMode(!isTrainMode);
-        }}
+        onManageTagsButtonClick={() => setTagsModalVisible(true)}
+        onTrainModeButtonClick={() => setTrainMode(!isTrainMode)}
         isTrainMode={isTrainMode}
       />
       {isTrainMode ? (
@@ -103,6 +103,21 @@ export const MainContainer = ({ setLoading }) => {
           initialValues={initialFormData}
           onCancel={() => {
             setFormVisible(false);
+          }}
+        />
+      </Modal>
+      <Modal
+        title="Manage tags"
+        isShown={isTagsModalVisible}
+        onClose={() => {
+          setTagsModalVisible(false);
+        }}
+      >
+        <ManageTagsForm
+          onSave={onSave}
+          initialValues={initialFormData}
+          onCancel={() => {
+            setTagsModalVisible(false);
           }}
         />
       </Modal>

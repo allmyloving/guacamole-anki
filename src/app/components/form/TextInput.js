@@ -20,7 +20,7 @@ export const TextInput = ({
       <Label style={{ width: 90 }}>{label}</Label>
       <Control style={{ flex: 1 }}>
         <Component
-          onChange={onChange}
+          onChange={(event) => onChange(event.target.value)}
           placeholder={placeholder}
           value={value}
         />
@@ -29,15 +29,11 @@ export const TextInput = ({
         <Button
           key={letter}
           style={{ width: 15 }}
+          tabIndex={999}
           onClick={() =>
-            onChange({
-              target: {
-                value: `${value || ""}${
-                  upperCaseMode ? letter.toUpperCase() : letter
-                }`
-              }
-            })
-          }
+            onChange(
+              `${value || ""}${upperCaseMode ? letter.toUpperCase() : letter}`
+            )}
         >
           {upperCaseMode ? letter.toUpperCase() : letter}
         </Button>
@@ -45,6 +41,7 @@ export const TextInput = ({
       <Button
         onClick={() => setUpperCaseMode(!upperCaseMode)}
         style={{ width: 15 }}
+        tabIndex={999}
       >
         <FontAwesomeIcon icon={faArrowUp} />
       </Button>

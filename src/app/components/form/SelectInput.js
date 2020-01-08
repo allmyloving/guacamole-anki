@@ -14,7 +14,7 @@ export const SelectInput = ({
   <Field style={{ display: "flex", ...extraStyles }}>
     <Label style={{ width: 90 }}>{label}</Label>
     <Control style={{ flexGrow: 1 }}>
-      <Select onChange={onChange} value={value}>
+      <Select onChange={event => onChange(event.target.value)} value={value}>
         {options.map(({ value: langValue, title }) => (
           <option key={langValue} value={langValue}>
             {title}
@@ -33,5 +33,6 @@ SelectInput.propTypes = {
       title: PropTypes.string.isRequired
     })
   ).isRequired,
-  onChange: PropTypes.func.isRequired
+  onChange: PropTypes.func.isRequired,
+  value: PropTypes.string.isRequired
 };
