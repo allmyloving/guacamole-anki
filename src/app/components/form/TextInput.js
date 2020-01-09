@@ -20,7 +20,7 @@ export const TextInput = ({
       <Label style={{ width: 90 }}>{label}</Label>
       <Control style={{ flex: 1 }}>
         <Component
-          onChange={(event) => onChange(event.target.value)}
+          onChange={event => onChange(event.target.value)}
           placeholder={placeholder}
           value={value}
         />

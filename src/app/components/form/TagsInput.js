@@ -13,17 +13,17 @@ export const TagsInput = ({
     <SelectInput
       label={label}
       options={options
-        .filter(({ value }) => currentValues.indexOf(value) === -1)
-        .map(({ value }) => ({ value, title: value }))}
-      onChange={value => onChange([...currentValues, value])}
+        .filter(({ title }) => currentValues.indexOf(title) === -1)
+        .map(({ title }) => ({ title, value: title }))}
+      onChange={title => onChange([...currentValues, title])}
       value=""
     />
     <TagsView
       tags={currentValues.map(tag =>
-        options.find(({ value }) => value === tag)
+        options.find(({ title }) => title === tag)
       )}
-      onRemove={value => {
-        const index = currentValues.findIndex(tag => tag === value);
+      onRemove={title => {
+        const index = currentValues.findIndex(tag => tag === title);
         const newValues = [
           ...currentValues.slice(0, index),
           ...currentValues.slice(index + 1, currentValues.length)

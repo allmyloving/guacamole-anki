@@ -8,11 +8,11 @@ const { Control, Field } = Form;
 export const TagsView = ({ tags, onRemove }) => {
   return (
     <Field multiline kind="group">
-      {tags.map(({ value, color }) => (
-        <Control key={value}>
+      {tags.map(({ id, title, color }) => (
+        <Control key={id}>
           <Tag.Group gapless>
-            <Tag color={color}>{value}</Tag>
-            <Tag remove onClick={() => onRemove(value)} />
+            <Tag color={color}>{title}</Tag>
+            <Tag remove onClick={() => onRemove(id)} />
           </Tag.Group>
         </Control>
       ))}

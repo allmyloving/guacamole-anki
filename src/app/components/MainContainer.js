@@ -115,8 +115,7 @@ export const MainContainer = ({ setLoading }) => {
         }}
       >
         <ManageTagsForm
-          onSave={onSave}
-          initialValues={initialFormData}
+          withLoader={withLoader}
           onCancel={() => {
             setTagsModalVisible(false);
           }}

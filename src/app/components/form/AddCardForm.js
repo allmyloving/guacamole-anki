@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { Form, Button } from "react-bulma-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -7,10 +7,11 @@ import { TextInput } from "./TextInput";
 import { SelectInput } from "./SelectInput";
 import { TagsInput } from "./TagsInput";
 import { languages } from "../../../data/supportedLanguages";
+import { tagsApi } from "../../api";
 
 const { Field, Control, Textarea } = Form;
 
-const fields = [
+const getFormFields = tags => [
   {
     label: "Original",
     placeholder: "Word in original language",
@@ -53,26 +54,24 @@ const fields = [
     label: "Tags",
     name: "tags",
     component: TagsInput,
-    options: [
-      { value: "" },
-      {
-        value: "Kapitel 7",
-        color: "success"
-      },
-      {
-        value: "Kapitel 6",
-        color: "warning"
-      }
-    ]
+    options: tags
   }
 ];
 
 export const AddCardForm = ({ initialValues, onSave, onCancel }) => {
   const [values, changeValues] = useState(initialValues);
+  const [fields, setFields] = useState();
+
+  useEffect(() => {
+    tagsApi
+      .fetchTags()
+      .then(response => setFields(getFormFields(response.tags)));
+  }, []);
 
   const changeField = (value, fieldName) => {
     changeValues({ ...values, [fieldName]: value });
   };
+  if (!fields) return null;
   return (
     <>
       <div style={{ marginBottom: 30 }}>
