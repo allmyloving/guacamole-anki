@@ -57,6 +57,7 @@ export const MainContainer = ({ setLoading }) => {
   };
   const openAddNewModal = () => {
     setModalMode("add");
+    setInitialFormData();
     setFormVisible(true);
   };
   if (!cards) return null;
