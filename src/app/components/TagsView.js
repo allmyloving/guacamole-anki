@@ -12,7 +12,7 @@ export const TagsView = ({ tags, onRemove }) => {
         <Control key={id}>
           <Tag.Group gapless>
             <Tag color={color}>{title}</Tag>
-            <Tag remove onClick={() => onRemove(id)} />
+            {onRemove && <Tag remove onClick={() => onRemove(id)} />}
           </Tag.Group>
         </Control>
       ))}
@@ -27,5 +27,9 @@ TagsView.propTypes = {
       color: PropTypes.string
     })
   ),
-  onRemove: PropTypes.func.isRequired
+  onRemove: PropTypes.func
 };
+
+TagsView.propTypes = {
+  onRemove: null
+}

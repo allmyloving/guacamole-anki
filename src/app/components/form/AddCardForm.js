@@ -54,7 +54,7 @@ const getFormFields = tags => [
     label: "Tags",
     name: "tags",
     component: TagsInput,
-    options: tags
+    options: [{ color: "", title: " " }, ...tags]
   }
 ];
 

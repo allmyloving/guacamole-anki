@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Card as StyledCard, Box } from "react-bulma-components";
 import { CardActions } from "./CardActions";
+import { TagsView } from "./TagsView";
 
 const styles = {
   Card: {
@@ -15,12 +16,21 @@ const styles = {
 };
 const { Content } = StyledCard;
 
-export const Card = ({ card, onEditButtonClick, onDeleteButtonClick }) => {
-  const { original, example, translation, definition } = card;
+export const Card = ({
+  tags,
+  card,
+  onEditButtonClick,
+  onDeleteButtonClick
+}) => {
+  const { original, example, translation, definition, tags: cardTags } = card;
+  const formattedTags = cardTags.map(tag =>
+    tags.find(({ title }) => title === tag)
+  );
 
   return (
     <StyledCard style={styles.Card}>
       <div style={{ flexShrink: 0 }}>
+        <TagsView tags={formattedTags} />
         <p className="card-header-title" style={{ fontSize: 24 }}>
           {original}
         </p>

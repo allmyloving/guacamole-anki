@@ -4,6 +4,7 @@ import { Tile, Heading, Box } from "react-bulma-components";
 import { Card } from "./Card";
 
 export const CardsContainer = ({
+  tags,
   cards,
   lang: { value, title },
   onEditButtonClick,
@@ -17,6 +18,7 @@ export const CardsContainer = ({
         .map(card => (
           <Tile size={4} key={card.id}>
             <Card
+              tags={tags}
               card={card}
               onEditButtonClick={onEditButtonClick}
               onDeleteButtonClick={onDeleteButtonClick}

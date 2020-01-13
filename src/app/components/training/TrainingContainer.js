@@ -46,7 +46,7 @@ export const TrainingContainer = () => {
           <SelectInput
             label="Select language"
             value={selectedLanguage}
-            onChange={({ target: { value } }) => setSelectedLanguage(value)}
+            onChange={value => setSelectedLanguage(value)}
             options={languages}
             extraStyles={{ flexDirection: "column" }}
           />

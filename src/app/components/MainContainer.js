@@ -7,7 +7,7 @@ import { AddCardForm, ManageTagsForm } from "./form";
 import { Modal } from "./Modal";
 import { CardsContainer } from "./CardsContainer";
 import { languages } from "../../data/supportedLanguages";
-import { createCard, updateCard, deleteCard } from "../api";
+import { createCard, updateCard, deleteCard, tagsApi } from "../api";
 import { loadCards } from "../store/actions";
 import { TrainingContainer } from "./training";
 import { Header } from "./Header";
@@ -21,6 +21,7 @@ export const MainContainer = ({ setLoading }) => {
   const [initialFormData, setInitialFormData] = useState();
   const [isTrainMode, setTrainMode] = useState(false);
   const [selectedLang, setSelectedLang] = useState(languages[0]);
+  const [tags, setTags] = useState([]);
 
   const cards = useSelector(state => state.cards.cards);
   const dispatch = useDispatch();
@@ -28,6 +29,7 @@ export const MainContainer = ({ setLoading }) => {
   const withLoader = action => {
     setLoading(true);
     action()
+      .then(() => tagsApi.fetchTags().then(response => setTags(response.tags)))
       .then(() => dispatch(loadCards()))
       .then(() => {
         setLoading(false);
@@ -60,7 +62,7 @@ export const MainContainer = ({ setLoading }) => {
     setInitialFormData();
     setFormVisible(true);
   };
-  if (!cards) return null;
+  if (!cards || !tags) return null;
   return (
     <>
       <Header
@@ -85,6 +87,7 @@ export const MainContainer = ({ setLoading }) => {
             ))}
           </Tabs>
           <CardsContainer
+            tags={tags}
             cards={cards}
             lang={selectedLang}
             onEditButtonClick={openEditModal}

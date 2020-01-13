@@ -14,11 +14,12 @@ const { Content, Footer } = StyledCard;
 
 export const TrainingCard = ({ card, actionCallback }) => {
   const { id, original, example, translation } = card;
-  const [showExample, setShowExample] = useState(false);
-  const [showOriginal, setShowOriginal] = useState(true);
+  const [isShowExample, setShowExample] = useState(false);
+  const [isShowOriginal, setShowOriginal] = useState(false);
   const cardLearned = learned => {
     setCardLearned(id, learned)
-      .then(() => showExample(false))
+      .then(() => setShowExample(false))
+      .then(() => setShowOriginal(false))
       .then(actionCallback);
   };
 
@@ -26,10 +27,10 @@ export const TrainingCard = ({ card, actionCallback }) => {
     <StyledCard style={{ width: 500, display: "inline-block", border: 2 }}>
       <Content>
         <p style={{ fontSize: 24, fontWeight: "bold" }}>
-          {showOriginal ? original : translation}
+          {isShowOriginal ? original : translation}
         </p>
-        {showExample && <i>{example}</i>}
-        {!showExample && (
+        {isShowExample && <i>{example}</i>}
+        {!isShowExample && (
           <Button onClick={() => setShowExample(true)} text>
             <FontAwesomeIcon icon={faHandPointRight} />
             Hint
@@ -37,7 +38,7 @@ export const TrainingCard = ({ card, actionCallback }) => {
         )}
         <Button
           style={{ position: "absolute", top: 0, right: 0 }}
-          onClick={() => setShowOriginal(!showOriginal)}
+          onClick={() => setShowOriginal(!isShowOriginal)}
         >
           <FontAwesomeIcon icon={faRedoAlt} />
         </Button>
