@@ -26,10 +26,10 @@ TagsView.propTypes = {
       value: PropTypes.string.isRequired,
       color: PropTypes.string
     })
-  ),
+  ).isRequired,
   onRemove: PropTypes.func
 };
 
-TagsView.propTypes = {
+TagsView.defaultProps = {
   onRemove: null
-}
+};

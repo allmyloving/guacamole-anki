@@ -5,19 +5,20 @@ import { Form, Button } from "react-bulma-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowUp } from "@fortawesome/free-solid-svg-icons";
 
-const { Field, Label, Control, Input } = Form;
+const { Field, Label, Control, Input, Help } = Form;
 const additionalLetters = ["ä", "ö", "ü", "ß"];
 export const TextInput = ({
   label,
   onChange,
   value,
   placeholder,
+  hasError,
   renderAs: Component
 }) => {
   const [upperCaseMode, setUpperCaseMode] = useState(false);
   return (
     <Field style={{ display: "flex" }}>
-      <Label style={{ width: 90 }}>{label}</Label>
+      <Label style={{ width: 90, alignSelf: "flex-end" }}>{label}</Label>
       <Control style={{ flex: 1 }}>
         <Component
           onChange={event => onChange(event.target.value)}
@@ -45,6 +46,7 @@ export const TextInput = ({
       >
         <FontAwesomeIcon icon={faArrowUp} />
       </Button>
+      {hasError && <Help color="danger">Fill in this field</Help>}
     </Field>
   );
 };
@@ -53,6 +55,7 @@ TextInput.propTypes = {
   label: PropTypes.string.isRequired,
   value: PropTypes.string,
   placeholder: PropTypes.string.isRequired,
+  hasError: PropTypes.bool.isRequired,
   onChange: PropTypes.func.isRequired,
   renderAs: PropTypes.func
 };

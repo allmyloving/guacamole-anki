@@ -59,9 +59,8 @@ export const ManageTagsForm = ({ withLoader }) => {
       </Field>
       <TagsView
         tags={tags}
-        onRemove={id => {
-          withLoader(() => tagsApi.deleteTag(id).then(refreshTags));
-        }}
+        onRemove={id =>
+          withLoader(() => tagsApi.deleteTag(id).then(refreshTags))}
       />
     </>
   );

@@ -37,10 +37,10 @@ export const TagsInput = ({
 TagsInput.propTypes = {
   options: PropTypes.arrayOf(
     PropTypes.shape({
-      value: PropTypes.string.isRequired,
+      value: PropTypes.string,
       color: PropTypes.string
     })
-  ),
+  ).isRequired,
   label: PropTypes.string.isRequired,
   value: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
   onChange: PropTypes.func.isRequired
