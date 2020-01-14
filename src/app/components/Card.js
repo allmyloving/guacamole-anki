@@ -23,9 +23,9 @@ export const Card = ({
   onDeleteButtonClick
 }) => {
   const { original, example, translation, definition, tags: cardTags } = card;
-  const formattedTags = cardTags.map(tag =>
-    tags.find(({ title }) => title === tag)
-  );
+  const formattedTags = cardTags
+    .map(tag => tags.find(({ title }) => title === tag))
+    .filter(tag => tag);
 
   return (
     <StyledCard style={styles.Card}>
