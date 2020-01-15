@@ -10,7 +10,7 @@ import { languages } from "../../../data/supportedLanguages";
 export const TrainingContainer = () => {
   const [trainingCards, setTrainingCards] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [selectedLanguage, setSelectedLanguage] = useState(languages[0]);
+  const [selectedLanguage, setSelectedLanguage] = useState(languages[0].value);
   const cards = useSelector(state => state.cards.cards);
 
   const startTraining = () => {
@@ -46,7 +46,7 @@ export const TrainingContainer = () => {
           <SelectInput
             label="Select language"
             value={selectedLanguage}
-            onChange={value => setSelectedLanguage(value)}
+            onChange={lang => setSelectedLanguage(lang)}
             options={languages}
             extraStyles={{ flexDirection: "column" }}
           />

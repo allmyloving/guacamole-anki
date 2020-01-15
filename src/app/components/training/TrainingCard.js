@@ -13,8 +13,9 @@ import { setCardLearned } from "../../api";
 const { Content, Footer } = StyledCard;
 
 export const TrainingCard = ({ card, actionCallback }) => {
-  const { id, original, example, translation } = card;
+  const { id, original, definition, example, translation } = card;
   const [isShowExample, setShowExample] = useState(false);
+  const [isShowDefinition, setShowDefinition] = useState(false);
   const [isShowOriginal, setShowOriginal] = useState(false);
   const cardLearned = learned => {
     setCardLearned(id, learned)
@@ -29,12 +30,25 @@ export const TrainingCard = ({ card, actionCallback }) => {
         <p style={{ fontSize: 24, fontWeight: "bold" }}>
           {isShowOriginal ? original : translation}
         </p>
-        {isShowExample && <i>{example}</i>}
-        {!isShowExample && (
-          <Button onClick={() => setShowExample(true)} text>
-            <FontAwesomeIcon icon={faHandPointRight} />
-            Hint
-          </Button>
+        {isShowDefinition ? (
+          <i>{definition}</i>
+        ) : (
+          definition && (
+            <Button onClick={() => setShowDefinition(true)} text>
+              <FontAwesomeIcon icon={faHandPointRight} />
+              Hint
+            </Button>
+          )
+        )}
+        {isShowExample ? (
+          <i>{example}</i>
+        ) : (
+          example && (
+            <Button onClick={() => setShowExample(true)} text>
+              <FontAwesomeIcon icon={faHandPointRight} />
+              Hint
+            </Button>
+          )
         )}
         <Button
           style={{ position: "absolute", top: 0, right: 0 }}
@@ -46,13 +60,11 @@ export const TrainingCard = ({ card, actionCallback }) => {
       <Footer>
         <Button.Group
           hasAddons
-          fullwidth
           position="centered"
           style={{ width: "100%", opacity: 0.8, height: 50 }}
         >
           <Button
             color="success"
-            light
             onClick={() => cardLearned(true)}
             style={{ width: "50%", height: "100%" }}
           >
