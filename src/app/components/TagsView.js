@@ -12,7 +12,7 @@ export const TagsView = ({ tags, onRemove }) => {
         <Control key={id}>
           <Tag.Group gapless>
             <Tag color={color}>{title}</Tag>
-            {onRemove && <Tag remove onClick={() => onRemove(id)} />}
+            {onRemove && <Tag remove onClick={() => onRemove({ id, title })} />}
           </Tag.Group>
         </Control>
       ))}

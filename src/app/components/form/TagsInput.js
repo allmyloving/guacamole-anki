@@ -19,10 +19,10 @@ export const TagsInput = ({
       value=""
     />
     <TagsView
-      tags={currentValues.map(tag =>
-        options.find(({ title }) => title === tag)
-      )}
-      onRemove={title => {
+      tags={currentValues
+        .map(tag => options.find(({ title }) => title === tag))
+        .filter(tag => tag)}
+      onRemove={({ title }) => {
         const index = currentValues.findIndex(tag => tag === title);
         const newValues = [
           ...currentValues.slice(0, index),

@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Button } from "react-bulma-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -40,4 +41,11 @@ export const Header = ({
       </Button>
     </div>
   );
+};
+
+Header.propTypes = {
+  onAddButtonClick: PropTypes.func.isRequired,
+  onTrainModeButtonClick: PropTypes.func.isRequired,
+  onManageTagsButtonClick: PropTypes.func.isRequired,
+  isTrainMode: PropTypes.bool.isRequired
 };

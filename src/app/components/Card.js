@@ -63,6 +63,17 @@ Card.propTypes = {
     translation: PropTypes.string.isRequired,
     definition: PropTypes.string
   }).isRequired,
+  tags: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      color: PropTypes.string.isRequired
+    })
+  ),
   onEditButtonClick: PropTypes.func.isRequired,
   onDeleteButtonClick: PropTypes.func.isRequired
+};
+
+Card.defaultProps = {
+  tags: []
 };
