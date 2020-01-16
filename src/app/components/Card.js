@@ -29,8 +29,8 @@ export const Card = ({
 
   return (
     <StyledCard style={styles.Card}>
+      <TagsView tags={formattedTags} />
       <div style={{ flexShrink: 0 }}>
-        <TagsView tags={formattedTags} />
         <p className="card-header-title" style={{ fontSize: 24 }}>
           {original}
         </p>
