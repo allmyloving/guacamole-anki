@@ -25,9 +25,9 @@ export const Card = ({
   const { original, example, translation, definition, tags: cardTags } = card;
   const formattedTags = cardTags
     .map(tag => tags.find(({ title }) => title === tag))
-    .filter(tag => tag);
+    .filter(tag => tag && tag.title);
 
-  return (
+    return (
     <StyledCard style={styles.Card}>
       <TagsView tags={formattedTags} />
       <div style={{ flexShrink: 0 }}>

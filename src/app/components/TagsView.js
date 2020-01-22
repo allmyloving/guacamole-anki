@@ -23,8 +23,8 @@ export const TagsView = ({ tags, onRemove }) => {
 TagsView.propTypes = {
   tags: PropTypes.arrayOf(
     PropTypes.shape({
-      value: PropTypes.string.isRequired,
-      color: PropTypes.string
+      title: PropTypes.string.isRequired,
+      color: PropTypes.string.isRequired
     })
   ).isRequired,
   onRemove: PropTypes.func

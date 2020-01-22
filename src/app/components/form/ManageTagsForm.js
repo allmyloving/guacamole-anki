@@ -18,7 +18,7 @@ const colors = [
 
 export const ManageTagsForm = ({ withLoader }) => {
   const [tags, setTags] = useState([]);
-  const [formValues, setFormValues] = useState({});
+  const [formValues, setFormValues] = useState({ color: colors[0] });
 
   const refreshTags = () =>
     tagsApi.fetchTags().then(response => setTags(response.tags));
@@ -65,4 +65,3 @@ export const ManageTagsForm = ({ withLoader }) => {
     </>
   );
 };
-

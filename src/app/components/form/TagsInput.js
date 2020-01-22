@@ -21,7 +21,7 @@ export const TagsInput = ({
     <TagsView
       tags={currentValues
         .map(tag => options.find(({ title }) => title === tag))
-        .filter(tag => tag)}
+        .filter(tag => tag && tag.title)}
       onRemove={({ title }) => {
         const index = currentValues.findIndex(tag => tag === title);
         const newValues = [
