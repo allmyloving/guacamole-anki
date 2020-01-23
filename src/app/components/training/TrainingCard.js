@@ -14,45 +14,48 @@ const { Content, Footer } = StyledCard;
 
 export const TrainingCard = ({ card, actionCallback }) => {
   const { id, original, definition, example, translation } = card;
-  const [isShowExample, setShowExample] = useState(false);
-  const [isShowDefinition, setShowDefinition] = useState(false);
-  const [isShowOriginal, setShowOriginal] = useState(false);
+  const [settings, setSettings] = useState({});
   const cardLearned = learned => {
     setCardLearned(id, learned)
-      .then(() => setShowExample(false))
-      .then(() => setShowOriginal(false))
+      .then(() => setSettings({}))
       .then(actionCallback);
   };
+
+  const {
+    original: showOriginal,
+    definition: showDefinition
+  } = settings;
 
   return (
     <StyledCard style={{ width: 500, display: "inline-block", border: 2 }}>
       <Content>
         <p style={{ fontSize: 24, fontWeight: "bold" }}>
-          {isShowOriginal ? original : translation}
+          {showOriginal ? original : translation}
         </p>
-        {isShowDefinition ? (
-          <i>{definition}</i>
+        {showDefinition ? (
+          <p>
+            <i>{definition}</i>
+          </p>
         ) : (
           definition && (
-            <Button onClick={() => setShowDefinition(true)} text>
+            <Button
+              onClick={() => setSettings({ ...settings, definition: true })}
+              text
+            >
               <FontAwesomeIcon icon={faHandPointRight} />
               Hint
             </Button>
           )
         )}
-        {isShowExample ? (
-          <i>{example}</i>
-        ) : (
-          example && (
-            <Button onClick={() => setShowExample(true)} text>
-              <FontAwesomeIcon icon={faHandPointRight} />
-              Hint
-            </Button>
-          )
+        {showOriginal && (
+          <p>
+            <i>{example}</i>
+          </p>
         )}
         <Button
           style={{ position: "absolute", top: 0, right: 0 }}
-          onClick={() => setShowOriginal(!isShowOriginal)}
+          onClick={() =>
+            setSettings({ ...settings, original: !settings.original })}
         >
           <FontAwesomeIcon icon={faRedoAlt} />
         </Button>

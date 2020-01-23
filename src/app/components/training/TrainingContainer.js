@@ -18,6 +18,7 @@ export const TrainingContainer = () => {
       ({ readyForRevision, language }) =>
         readyForRevision && language === selectedLanguage
     );
+    console.log(filtered)
     setTrainingCards(filtered);
   };
 
