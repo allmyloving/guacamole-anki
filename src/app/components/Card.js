@@ -19,6 +19,7 @@ const { Content } = StyledCard;
 export const Card = ({
   tags,
   card,
+  onTagClick,
   onEditButtonClick,
   onDeleteButtonClick
 }) => {
@@ -27,9 +28,9 @@ export const Card = ({
     .map(tag => tags.find(({ title }) => title === tag))
     .filter(tag => tag && tag.title);
 
-    return (
+  return (
     <StyledCard style={styles.Card}>
-      <TagsView tags={formattedTags} />
+      <TagsView tags={formattedTags} onClick={onTagClick} />
       <div style={{ flexShrink: 0 }}>
         <p className="card-header-title" style={{ fontSize: 24 }}>
           {original}
@@ -70,6 +71,7 @@ Card.propTypes = {
       color: PropTypes.string.isRequired
     })
   ),
+  onTagClick: PropTypes.func.isRequired,
   onEditButtonClick: PropTypes.func.isRequired,
   onDeleteButtonClick: PropTypes.func.isRequired
 };
