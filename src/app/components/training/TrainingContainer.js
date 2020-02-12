@@ -7,10 +7,22 @@ import { TrainingCard } from "./TrainingCard";
 import { SelectInput } from "../form";
 import { languages } from "../../../data/supportedLanguages";
 
+const modes = [
+  {
+    value: "translation",
+    title: "Translation"
+  },
+  {
+    value: "original",
+    title: "Original"
+  }
+];
+
 export const TrainingContainer = () => {
   const [trainingCards, setTrainingCards] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedLanguage, setSelectedLanguage] = useState(languages[0].value);
+  const [selectedMode, setSelectedMode] = useState(modes[0].value);
   const cards = useSelector(state => state.cards.cards);
 
   const startTraining = () => {
@@ -18,7 +30,6 @@ export const TrainingContainer = () => {
       ({ readyForRevision, language }) =>
         readyForRevision && language === selectedLanguage
     );
-    console.log(filtered)
     setTrainingCards(filtered);
   };
 
@@ -40,6 +51,7 @@ export const TrainingContainer = () => {
         <TrainingCard
           id={trainingCards[currentIndex].id}
           card={trainingCards[currentIndex]}
+          mode={selectedMode}
           actionCallback={() => setCurrentIndex(currentIndex + 1)}
         />
       ) : (
@@ -49,6 +61,13 @@ export const TrainingContainer = () => {
             value={selectedLanguage}
             onChange={lang => setSelectedLanguage(lang)}
             options={languages}
+            extraStyles={{ flexDirection: "column" }}
+          />
+          <SelectInput
+            label="Select front card language"
+            value={selectedMode}
+            onChange={mode => setSelectedMode(mode)}
+            options={modes}
             extraStyles={{ flexDirection: "column" }}
           />
           <Button size="large" onClick={startTraining}>
